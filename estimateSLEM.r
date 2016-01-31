@@ -11,7 +11,8 @@ A=matrix(c(1,0,0,1,0,0,
            1,1,1,0,0,0,
            0,0,0,1,1,1),nrow=5,ncol=6,byrow=T)
 
-b=c(4,4,4,6,6)
+#initial node
+u=matrix(c(2,2,2,2,2,2),nrow=1,ncol=6)
 
 M=matrix(c(1 , 0, 1,
            0 , 1,-1,
@@ -28,24 +29,16 @@ f=function(f){
 #Let TT denote how long the "long time"=T
 TT=1000
 
-estimateSLEM=function(A,b,M,f,TT){
+estimateSLEM=function(A,u,M,f,TT){
   
   #pg15 step2
-  
-  #Let the inital state column sums of A
-  
-  X0=rep(NA,ncol(A))
-  
-  for (i in 1:ncol(A)){
-    X0[i]=sum(A[,i])
-  }
   
   #Collect samples f(X0),....,f(XTT)
   
   samples=rep(NA,TT)
   
-  samples[1]=f(X0)
-  X=X0
+  samples[1]=f(u)
+  X=u
   
   for (i in 1:(TT-1)){
     
@@ -71,4 +64,4 @@ estimateSLEM=function(A,b,M,f,TT){
   
 }#Close the function estimateSLEM
 
-estimateSLEM(A,b,M,f,TT)
+estimateSLEM(A,u,M,f,TT)
