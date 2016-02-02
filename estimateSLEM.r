@@ -30,6 +30,7 @@ f=function(f){
 TT=1000
 
 #Let n denote the "small number" in step 3. Let's just say n=10 for now.
+#n should be so that 2n-1<TT, otherwise we have a division-by-zero
 n=10
 
 estimateSLEM=function(A,u,M,f,TT,n){
@@ -75,16 +76,16 @@ Cf=rep(NA,2*n)
 #f.hat(XTT)
 f.hat=mean(samples)
 
-for (s in 1:(2*n)){
+for (s in 0:(2*n-1)){
   
   #Let f.3.0.4 denote (f_t-f.hat_T)(f_(t+1)-f.hat_T) in (3.0.4) page 10  
-  f.3.0.4=rep(NA,(TT-abs(s-1)))
+  f.3.0.4=rep(NA,(TT-abs(s)))
   
-  for (t in 1:(TT-abs(s-1))){
-    f.3.0.4[t]=(samples[t]-f.hat)*(samples[t+1]-f.hat)
-  } # End of for (t in (1:TT-abs(s-1)))
+  for (t in 1:(TT-abs(s))){
+    f.3.0.4[t]=(samples[t]-f.hat)*(samples[t+s]-f.hat)
+  } # End of for (t in (1:TT-abs(s)))
   
-  Cf[s]=sum(f.3.0.4)/(TT-abs(s-1))
+  Cf[s+1]=sum(f.3.0.4)/(TT-abs(s))
   
 }# end of for (s in (2*n-1))
 
