@@ -53,8 +53,9 @@ estimateSLEM=function(A,u,M,f,TT,n){
       
       Xproposal=X+move
       
+      #escape the while loop only if all entries are non-zero
       if (all(Xproposal>=0)){
-      
+        
         X=Xproposal
         break
       } #close if statement
