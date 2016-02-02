@@ -51,11 +51,11 @@ estimateSLEM=function(A,u,M,f,TT,n){
       t=sample(c(1,-1),1)
       move=t*M[,s]
       
-      X1=X+move
+      Xproposal=X+move
       
-      if (all(X1>=0)){
+      if (all(Xproposal>=0)){
       
-        X=X1
+        X=Xproposal
         break
       } #close if statement
     }#close while loop
