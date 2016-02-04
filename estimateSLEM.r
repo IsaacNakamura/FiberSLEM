@@ -1,7 +1,7 @@
 ########################################
 ## The algorithm to estimate the SLEM ##
 ########################################
-#test
+
 #Here I picked 2 by 3 table 
 #with column sums c=(4,4,4) and row sums r=(6,6).
 
