@@ -99,7 +99,7 @@ B.hat=matrix(NA,nrow=n,ncol=n,byrow=T)
 for (i in 1:n){
   for (j in 1:n){
     
-    A.hat[i,j]=Cf[i+j]
+    A.hat[i,j]=Cf[i+j-1]
     
   } #close for loop j
 } #close for loop i
@@ -108,7 +108,7 @@ for (i in 1:n){
 for (i in 1:n){
   for (j in 1:n){
     
-    B.hat[i,j]=Cf[i+j-1]
+    B.hat[i,j]=Cf[i+j-2]
     
   } #close for loop j
 } #close for loop i
