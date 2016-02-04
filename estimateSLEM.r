@@ -89,10 +89,33 @@ for (s in 0:(2*n-1)){
   
 }# end of for (s in (2*n-1))
 
-return(Cf)
+#Step4 
+#Form the matrices A.hat and B.hat.
+
+A.hat=matrix(NA,nrow=n,ncol=n,byrow=T)
+B.hat=matrix(NA,nrow=n,ncol=n,byrow=T)
+
+#Fill in A.hat
+for (i in 1:n){
+  for (j in 1:n){
+    
+    A.hat[i,j]=Cf[i+j]
+    
+  } #close for loop j
+} #close for loop i
+
+#Fill in B.hat
+for (i in 1:n){
+  for (j in 1:n){
+    
+    B.hat[i,j]=Cf[i+j-1]
+    
+  } #close for loop j
+} #close for loop i
+
+return(list("A.hat",A.hat,"B.hat",B.hat))
   
 }#Close the function estimateSLEM
 
-#For now, this function returns the autocovariance function for f
-#The length of this out put vector is 2*n
+#This function returns the list of A.hat and B.hat on step 4.
 estimateSLEM(A,u,M,f,TT,n)
