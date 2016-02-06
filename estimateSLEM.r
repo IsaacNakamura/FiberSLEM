@@ -2,6 +2,9 @@
 ## The algorithm to estimate the SLEM ##
 ########################################
 
+install.packages("geigen")
+library("geigen")
+
 #Here I picked 2 by 3 table 
 #with column sums c=(4,4,4) and row sums r=(6,6).
 
@@ -33,6 +36,7 @@ TT=1000
 #n should be so that 2n-1<TT, otherwise we have a division-by-zero
 n=10
 
+#Function that returns the SLEM of fiber graph
 estimateSLEM=function(A,u,M,f,TT,n){
   
   #pg15 step2
@@ -113,9 +117,15 @@ for (i in 1:n){
   } #close for loop j
 } #close for loop i
 
-return(list("A.hat",A.hat,"B.hat",B.hat))
+#STEP5
+
+lambda <- geigen(A.hat, B.hat, symmetric=FALSE, only.values=TRUE)
+LGEM=max(lambda[[1]])
+
+return(LGEM)
   
 }#Close the function estimateSLEM
 
-#This function returns the list of A.hat and B.hat on step 4.
+#This function returns the LGEM of the pencil A.hat-lambda*B.hat 
+#as the estimate for labda.star.
 estimateSLEM(A,u,M,f,TT,n)
