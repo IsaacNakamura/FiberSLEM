@@ -120,7 +120,8 @@ for (i in 1:n){
 #STEP5
 
 lambda <- geigen(A.hat, B.hat, symmetric=FALSE, only.values=TRUE)
-LGEM=max(lambda[[1]])
+ABS=abs(lambda[[1]])
+LGEM=max(ABS)
 
 return(LGEM)
   
