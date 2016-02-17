@@ -4,53 +4,7 @@
 
 install.packages("geigen")
 library("geigen")
-
-#Here I picked 2 by 3 table 
-#with column sums c=(4,4,4) and row sums r=(6,6).
-
-#A=matrix(c(1,0,0,1,0,0,
-#           0,1,0,0,1,0,
-#           0,0,1,0,0,1,
-#           1,1,1,0,0,0,
-#           0,0,0,1,1,1),nrow=5,ncol=6,byrow=T)
-
-#initial node
-#u=matrix(c(2,2,2,2,2,2),nrow=1,ncol=6)
-
-#M=matrix(c(1 , 0, 1,
-#           0 , 1,-1,
-#           -1,-1, 0,
-#           -1 , 0,-1,
-#           0 ,-1, 1,
-#           1, 1, 0),nrow=6,ncol=3,byrow=T)
-
-library(algstat)
-
-A=matrix(c(1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,
-           0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,
-           0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,
-           0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,
-           1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,
-           0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,
-           0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,
-           0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1),nrow=8,ncol=16,byrow=T)
-
-u=matrix(c(2,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0),nrow=1,ncol=16)
-
-M=markov(A)
-
-
-#This time assume that f is the product of all values in the table.
-f=function(f){
-  return(prod(f))
-}
-
-#Let TT denote how long the "long time"=T
-TT=1000
-
-#Let n denote the "small number" in step 3. Let's just say n=10 for now.
-#n should be so that 2n-1<TT, otherwise we have a division-by-zero
-n=10
+library("algstat")
 
 #Function that returns the SLEM of fiber graph
 estimateSLEM=function(A,u,M,f,TT,n){
@@ -136,13 +90,10 @@ for (i in 1:n){
 #STEP5
 
 lambda <- geigen(A.hat, B.hat, symmetric=FALSE, only.values=TRUE)
+return(samples)
 ABS=abs(lambda[[1]])
 LGEM=max(ABS)
 
 return(LGEM)
   
 }#Close the function estimateSLEM
-
-#This function returns the LGEM of the pencil A.hat-lambda*B.hat 
-#as the estimate for labda.star.
-estimateSLEM(A,u,M,f,TT,n)
