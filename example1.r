@@ -1,4 +1,4 @@
-#Here I picked 2 by 3 table 
+#Here I picked 2 by 3 table
 #with column sums c=(4,4,4) and row sums r=(6,6).
 
 #A=matrix(c(1,0,0,1,0,0,
@@ -17,6 +17,9 @@
 #           0 ,-1, 1,
 #           1, 1, 0),nrow=6,ncol=3,byrow=T)
 
+#f=function(X){
+#  return(prod(X))
+#}
 
 A=matrix(c(1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,
            0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,
@@ -33,11 +36,24 @@ M=markov(A)
 
 
 #This time assume that f is the product of all values in the table.
-f=function(f){
+f=function(Y){
     #make case distinction
-    if f=c(0,1,1,0,1,0,0,0,1,0,0,0,0,0,0,0) then return 0.475963
-  return(sum(f))
-}
+    if (all(Y==c(0,1,1,0,1,0,0,0,1,0,0,0,0,0,0,0))) {
+      value=-0.475963
+    } else if (all(Y==c(1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0))){
+      value=-.162235
+    } else if (all(Y==c(1,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0))){
+      value=-.162235
+    } else if (all(Y==c(1,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0))){
+      value=-.162235
+    } else if (all(Y==c(1,0,1,0,1,0,0,0,0,1,0,0,0,0,0,0))){
+      value=-.162235
+    } else {
+      value= .553905
+    }
+    return(value)
+} #close function
+
 
 #Let TT denote how long the "long time"=T
 TT=1000
@@ -46,3 +62,4 @@ TT=1000
 #n should be so that 2n-1<TT, otherwise we have a division-by-zero
 n=10
 
+estimateSLEM(A,u,M,f,TT,n)
