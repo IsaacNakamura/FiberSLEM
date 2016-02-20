@@ -30,7 +30,7 @@ A=matrix(c(1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,
            0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,
            0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1),nrow=8,ncol=16,byrow=T)
 
-u=matrix(c(2,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0),nrow=1,ncol=16)
+u=matrix(c(0,1,1,0,1,0,0,0,1,0,0,0,0,0,0,0),nrow=1,ncol=16)
 
 M=markov(A)
 
@@ -56,7 +56,7 @@ f=function(Y){
 
 
 #Let TT denote how long the "long time"=T
-TT=1000
+TT=10000
 
 #Let n denote the "small number" in step 3. Let's just say n=10 for now.
 #n should be so that 2n-1<TT, otherwise we have a division-by-zero
