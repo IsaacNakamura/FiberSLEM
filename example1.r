@@ -1,3 +1,4 @@
+#Example 1 Eigen vector as observable 
 #Here I picked 2 by 3 table
 #with column sums c=(4,4,4) and row sums r=(6,6).
 
