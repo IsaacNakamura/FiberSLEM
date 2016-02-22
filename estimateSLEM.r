@@ -2,7 +2,6 @@
 ## The algorithm to estimate the SLEM ##
 ########################################
 
-install.packages("geigen")
 library("geigen")
 library("algstat")
 
