@@ -57,10 +57,10 @@ f=function(Y){
 
 
 #Let TT denote how long the "long time"=T
-TT=10000
+TT=500
 
 #Let n denote the "small number" in step 3. Let's just say n=10 for now.
 #n should be so that 2n-1<TT, otherwise we have a division-by-zero
-n=10
+n=200
 
 estimateSLEM(A,u,M,f,TT,n)
